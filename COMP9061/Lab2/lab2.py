@@ -23,9 +23,23 @@ def countPw(vocabulary, totalNumberOfWords):
         pw[item] =  (vocabulary[item] + 1) / (totalNumberOfWords + V)
     return pw
 
+def processMissing(positive, negative):
+    tempPos = set(negative) - set(positive)
+    tempNeg = set(positive) - set(negative)
+    outputPos = {}
+    outputNeg = {}
+    for item in tempPos:
+        outputPos[item] = 0
+    for item in tempNeg:
+        outputNeg[item] = 0
+    return outputPos, outputNeg
+
 def trainDataset(pathToPositive, pathToNegative):
     countsNegative, allNegative, instancesNegative = countOccurances(pathNegative)
     countsPositive , allPositive, instancesPositive = countOccurances(pathPositive)
+    missingPos, missingNeg = processMissing(countsPositive, countsNegative)
+    countsNegative.update(missingNeg)
+    countsPositive.update(missingPos)
     pWpos = countPw(countsPositive, allPositive)
     pWneg = countPw(countsNegative, allNegative)
     cPos = instancesPositive / (instancesPositive + instancesNegative)
@@ -38,6 +52,7 @@ def calculatePwC(data, pWs):
     for k, v in data.items():
         if k in pWs:
             probabilitySum += log((v * pWs[k]))
+                   
     return probabilitySum
 
 def classify(data, cP, cN, pWpos, pWneg):
