@@ -5,7 +5,10 @@ from math import log
 from collections import Counter
 
 
-
+'''
+Load data and count the occurances.
+TODO: look into data pre-processing
+'''
 def countOccurances(folder):
     allWords = []
     files = os.listdir(folder)
@@ -23,6 +26,9 @@ def countPw(vocabulary, totalNumberOfWords):
         pw[item] =  (vocabulary[item] + 1) / (totalNumberOfWords + V)
     return pw
 
+'''
+TODO: THat requires re-thinking and optimisation
+'''
 def processMissing(positive, negative):
     tempPos = set(negative) - set(positive)
     tempNeg = set(positive) - set(negative)
@@ -34,6 +40,10 @@ def processMissing(positive, negative):
         outputNeg[item] = 0
     return outputPos, outputNeg
 
+'''
+Train the model.
+TODO: look at optimising the missing words in neg/pos
+'''
 def trainDataset(pathToPositive, pathToNegative):
     countsNegative, allNegative, instancesNegative = countOccurances(pathNegative)
     countsPositive , allPositive, instancesPositive = countOccurances(pathPositive)
@@ -52,7 +62,6 @@ def calculatePwC(data, pWs):
     for k, v in data.items():
         if k in pWs:
             probabilitySum += log((v * pWs[k]))
-                   
     return probabilitySum
 
 def classify(data, cP, cN, pWpos, pWneg):
@@ -61,11 +70,6 @@ def classify(data, cP, cN, pWpos, pWneg):
     if pPosData > pNegData:
         return True
     return False
-
-pathNegative = 'C:\\Users\\adamze\\Downloads\\data\\train\\neg\\'
-pathPositive = 'C:\\Users\\adamze\\Downloads\\data\\train\\pos\\'
-
-pWpos, pWneg, cP, cN = trainDataset(pathPositive, pathNegative)
 
 def test(folder, c):
     files = os.listdir(folder)
@@ -80,6 +84,12 @@ def test(folder, c):
     accuracy = len([o for o in outcomes if o == c]) / len(files)
     print("Accuracy for: " + str(c) + " is " + str(accuracy))
     return
+
+pathNegative = 'C:\\Users\\adamze\\Downloads\\data\\train\\neg\\'
+pathPositive = 'C:\\Users\\adamze\\Downloads\\data\\train\\pos\\'
+
+pWpos, pWneg, cP, cN = trainDataset(pathPositive, pathNegative)
+
 
 test('C:\\Users\\adamze\\Downloads\\data\\test\\neg\\', False)
 test('C:\\Users\\adamze\\Downloads\\data\\test\\pos\\', True)
