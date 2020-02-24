@@ -27,6 +27,8 @@ def linearRegression(X, Y):
     plt.show()
 
 
+def gradient_descent(bias, lambda1, alpha, X, Y, max_iter):
+    
 
     
     
