@@ -1,0 +1,63 @@
+A neural chatbot using sequence to sequence model with attentional decoder. This is a fully functional chatbot.
+
+This is based on Google Translate Tensorflow model https://github.com/tensorflow/models/blob/master/tutorials/rnn/translate/
+
+Sequence to sequence model by Cho et al.(2014)
+Created by Chip Huyen
+
+#PLEASE USE TENSORFLOW VERSION 1.X FOR THIS CHATBOT.
+#IF YOU WANT TO RUN IT ON GOOGLE COLAB CHANGE THE DATA FOLDER TO '/content/'
+#I have run both on Google Colab and a Windows machine
+#All training have been done on Windows machine with Pythin 3.6 and TF 1.4
+
+
+Usage for TRAINING:
+
+
+
+
+Step 1: update config.py file. open the file you will understand.
+Change DATA_PATH to where you store your data
+
+step 2: run all the file in sequential order till 'python chatbot.py --mode train'
+
+step 3: once you think that the model loss is not changing much stop the training .
+
+step 4: we will now train our model only on joey_data() so as to give our boa a personality. run the cell 'python chatbot.py --mode train_joey' and it will trind on friends dataset for joey character.
+
+
+if you ave error sating 'ehs not equal to lhs' remove the last two ENC_VOCAB and DEC_VOCAB because my model checkpoints stored the data for whole dataset.
+
+step 7: after removing save the file and run 'python chatbot.py --mode chat' block to chat with the bot.
+
+
+
+usage for CHATTING AND FEEDBACK:
+
+i have trained the chatbot for 26000+ epochs 19000 for whole data(loss 2.87) and rest for just joey.(loss was around 0.05)
+
+step 1: adjust paths in checkpoint file and config.py
+
+step 2 :run python chatbot --mode chat, it should restore the weights and dictionaries and start. Please observe the feedback on the screen.
+
+
+step 3: if you want to give feedback then simply type keyword 'feedback:' followed by correction if you dont like the answer.
+for example: 
+user>> where do you live.
+bot>> <unk>.
+user>> feedback:I live in New-York.
+
+step 5 :press enter and continue chatting ,you can provide multiple feedback in single session.
+step 6 :once you think you are done and want to close the chat simply press 'enter'. 
+step 7 :after you end the session the bot will train the model for the feedbacks you provided.It will take time, be patient while it does that.
+
+
+Notes:-
+
+If mode is train, then you train the chatbot. By default, the model will restore the previously trained weights (if there is any) and continue training up on that.
+
+If you want to start training from scratch, please delete all the checkpoints in the checkpoints folder.
+
+If the mode is chat, you'll go into the interaction mode with the bot.
+
+By default, all the conversations you have with the chatbot will be written into the file output_convo.txt in the processed folder. 
