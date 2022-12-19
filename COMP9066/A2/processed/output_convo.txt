@@ -1,0 +1,24 @@
+HUMAN ++++ hello
+BOT ++++ .
+HUMAN ++++ how are you
+BOT ++++ the best
+HUMAN ++++ what is your name
+BOT ++++ the best
+HUMAN ++++ what about california
+BOT ++++ the <unk>
+HUMAN ++++ where are you?
+BOT ++++ the city .
+HUMAN ++++ my name is adam
+BOT ++++ the other one
+HUMAN ++++ what is my name
+BOT ++++ the <unk>
+HUMAN ++++ feedback:adam
+BOT ++++ the <unk>
+=============================================
+HUMAN ++++ what is my name?
+BOT ++++ the house .
+HUMAN ++++ tell me a joke
+BOT ++++ the <unk>
+HUMAN ++++ joke
+BOT ++++ the whole thing
+=============================================
